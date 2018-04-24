@@ -10,13 +10,13 @@ stop_511north = "http://webservices.nextbus.com/service/publicXMLFeed?command=pr
 stop_510north = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=10777&routeTag=510"
 stop_121east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=15504&routeTag=121"
 stops = [stop_509east,stop_511north,stop_511south,stop_510north,stop_121east]
-dirTags = {"511_1_511":"511 North  Bathurst @ Fort York",
-           "511_0_511":"511 South Bathurst @ Fort York",
-           "509_0_509":"509 East Queens Quay @ Dan Leckie",
-           "121_0_121A":"121 East Fort York @ Bathurst",
-           "121_0_121B":"121 East Fort York @ Bathurst",
-           "510_1_510A": "510 North Spadina @ Fort York",
-           "510_1_510B": "510 North Spadina @ Fort York"}
+dirTags = {"511_1_511":"511 North- Bathurst @ Fort York",
+           "511_0_511":"511 South- Bathurst @ Fort York",
+           "509_0_509":"509 East- Queens Quay @ Dan Leckie",
+           "121_0_121A":"121 East- Fort York @ Bathurst",
+           "121_0_121B":"121 East- Fort York @ Bathurst",
+           "510_1_510A": "510 North- Spadina @ Fort York",
+           "510_1_510B": "510 North- Spadina @ Fort York"}
 timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","121_0_121A":"","510_1_510A":""}
 keyList = ["511_1_511","511_0_511","509_0_509","121_0_121A","510_1_510A"]
 app = Flask(__name__)
