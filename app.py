@@ -9,9 +9,12 @@ stop_510north = "http://webservices.nextbus.com/service/publicXMLFeed?command=pr
 stop_121east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=15504&routeTag=121"
 stop_509west = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13362&routeTag=509"
 stops = [stop_509east,stop_509west,stop_511north,stop_511south,stop_510north,stop_121east]
-dirTags = {"511_1_511":"511 N- Bathurst @ Fort York","511_0_511":"511 S- Bathurst @ Fort York",
-           "509_0_509":"509 E- Queens Qy. @ Dan Leckie","509_1_509":"509 W- Queens Qy. @ Bathurst",
-           "121_0_121":"121 E- Fort York @ Bathurst","510_1_510":"510 N- Spadina @ Fort York"}
+routes = {"511_1_511":"511 North","511_0_511":"511 South",
+           "509_0_509":"509 East","509_1_509":"509 West",
+           "121_0_121":"121 East","510_1_510":"510 North"}
+close_stop = {"511_1_511":"Bathurst @ Fort York","511_0_511":"Bathurst @ Fort York",
+           "509_0_509":"Queens Quay @ Dan Leckie","509_1_509":"Queens Quay @ Bathurst",
+           "121_0_121":"Fort York @ Bathurst","510_1_510":"Spadina @ Fort York"}
 timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","509_1_509":"","121_0_121":"","510_1_510":""}
 keyList = ["511_1_511","509_0_509","510_1_510","511_0_511","509_1_509","121_0_121"]
 
@@ -31,8 +34,10 @@ def index():
             preds = data_dict['body']['predictions']['direction'][1]['prediction']
 
         for ind,vehicle in enumerate(preds):
-            arr = dt.datetime.strptime(str(int(int(vehicle['@seconds']) / 60)) + ":" +
-                                       str(int(int(vehicle['@seconds']) % 60)),"%M:%S")
+            mins = str(min(int(int(vehicle['@seconds']) / 60),59))
+            secs= str(min(int(int(vehicle['@seconds']) % 60),59))
+            arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
+
             arrtimes.append(arr.strftime("%M:%S"))
 
         dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
@@ -42,12 +47,12 @@ def index():
         #print(timeList)
 
     return render_template('index.html',
-        route0=dirTags[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
-        route1=dirTags[keyList[1]],times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
-        route2=dirTags[keyList[2]],times20=timeList[keyList[2]][0], times21=timeList[keyList[2]][1], times22=timeList[keyList[2]][2],
-        route3=dirTags[keyList[3]],times30=timeList[keyList[3]][0], times31=timeList[keyList[3]][1], times32=timeList[keyList[3]][2],
-        route4=dirTags[keyList[4]],times40=timeList[keyList[4]][0], times41=timeList[keyList[4]][1], times42=timeList[keyList[4]][2],
-        route5=dirTags[keyList[5]],times50=timeList[keyList[5]][0], times51=timeList[keyList[5]][1], times52=timeList[keyList[5]][2],)
+        route0=routes[keyList[0]],stop0=close_stop[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
+        route1=routes[keyList[1]],stop1=close_stop[keyList[1]],times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
+        route2=routes[keyList[2]],stop2=close_stop[keyList[2]],times20=timeList[keyList[2]][0], times21=timeList[keyList[2]][1], times22=timeList[keyList[2]][2],
+        route3=routes[keyList[3]],stop3=close_stop[keyList[3]],times30=timeList[keyList[3]][0], times31=timeList[keyList[3]][1], times32=timeList[keyList[3]][2],
+        route4=routes[keyList[4]],stop4=close_stop[keyList[4]],times40=timeList[keyList[4]][0], times41=timeList[keyList[4]][1], times42=timeList[keyList[4]][2],
+        route5=routes[keyList[5]],stop5=close_stop[keyList[5]],times50=timeList[keyList[5]][0], times51=timeList[keyList[5]][1], times52=timeList[keyList[5]][2],)
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 

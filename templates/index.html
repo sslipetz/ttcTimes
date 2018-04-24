@@ -1,25 +1,114 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+  <!--<title>Transit Times</title>-->
+  <!--<meta charset="utf-8">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1",>-->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+<!--<style>-->
+<!--.col-container {-->
+    <!--display: flex;-->
+    <!--width: 100%;-->
+<!--}-->
+<!--.col {-->
+    <!--flex: 1;-->
+    <!--padding: 16px;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container-fluid">-->
+  <!--<div class="row" >-->
+    <!--<div class="col-sm-4" style="background-color:powderblue;"><b>{{route0}}</b><br/>{{ times00 }}<br/>{{ times01 }}<br/>{{ times02 }}</div>-->
+    <!--<div class="col-sm-4" style="background-color:lightcoral;"><b>{{route1}}</b><br/>{{ times10 }}<br/>{{ times11 }}<br/>{{ times12 }}</div>-->
+    <!--<div class="col-sm-4" style="background-color:powderblue;"><b>{{route2}}</b><br/>{{ times20 }}<br/>{{ times21 }}<br/>{{ times22 }}</div>-->
+  <!--</div>-->
+ <!--<div class="row">-->
+    <!--<div class="col-sm-4" style="background-color:lightcoral;"><b>{{route3}}</b><br/>{{ times30 }}<br/>{{ times31 }}<br/>{{ times32 }}</div>-->
+    <!--<div class="col-sm-4" style="background-color:powderblue;"><b>{{route4}}</b><br/>{{ times40 }}<br/>{{ times41 }}<br/>{{ times42 }}</div>-->
+    <!--<div class="col-sm-4" style="background-color:lightcoral;"><b>{{route5}}</b><br/>{{ times50 }}<br/>{{ times51 }}<br/>{{ times52 }}</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Transit Times</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1",>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.col-container {
+    display: table;
+    width: 480px;
+    font-family: verdana;
+    text-align: center
+}
+.col {
+    display: table-cell;
+    width: 160px;
+    height: 160px;
+}
+h4 {
+    font-size: 10px;
+}
+</style>
 </head>
 <body>
 
-<div class="container-fluid">
-  <div class="row">
-      <div class="col-sm-4" style="background-color:lavender;"><b>{{route0}}</b><br/>{{ times00 }}<br/>{{ times01 }}<br/>{{ times02 }}</div>
-    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route1}}</b><br/>{{ times10 }}<br/>{{ times11 }}<br/>{{ times12 }}</div>
-    <div class="col-sm-4" style="background-color:lavender;"><b>{{route2}}</b><br/>{{ times20 }}<br/>{{ times21 }}<br/>{{ times22 }}</div>
+<div class="col-container">
+  <div class="col" style="background:powderblue">
+    <h2>{{route0}}</h2>
+      <h4>{{stop0}}</h4>
+      <p>{{ times00 }}</p>
+      <p>{{ times01 }}</p>
+      <p>{{ times02 }}</p>
   </div>
- <div class="row">
-    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route3}}</b><br/>{{ times30 }}<br/>{{ times31 }}<br/>{{ times32 }}</div>
-    <div class="col-sm-4" style="background-color:lavender;"><b>{{route4}}</b><br/>{{ times40 }}<br/>{{ times41 }}<br/>{{ times42 }}</div>
-    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route5}}</b><br/>{{ times50 }}<br/>{{ times51 }}<br/>{{ times52 }}</div>
+
+  <div class="col" style="background:lightcoral">
+    <h2>{{route1}}</h2>
+      <h4>{{stop1}}</h4>
+      <p>{{ times10 }}</p>
+      <p>{{ times11 }}</p>
+      <p>{{ times12 }}</p>
+  </div>
+
+  <div class="col" style="background:powderblue">
+    <h2>{{route2}}</h2>
+      <h4>{{stop2}}</h4>
+      <p>{{ times20 }}</p>
+      <p>{{ times21 }}</p>
+      <p>{{ times22 }}</p>
+  </div>
+</div>
+<div class="col-container">
+  <div class="col" style="background:lightcoral">
+    <h2>{{route3}}</h2>
+      <h4>{{stop3}}</h4>
+      <p>{{ times30 }}</p>
+      <p>{{ times31 }}</p>
+      <p>{{ times32 }}</p>
+  </div>
+
+  <div class="col" style="background:powderblue">
+    <h2>{{route4}}</h2>
+      <h4>{{stop4}}</h4>
+      <p>{{ times40 }}</p>
+      <p>{{ times41 }}</p>
+      <p>{{ times42 }}</p>
+  </div>
+
+  <div class="col" style="background:lightcoral">
+    <h2>{{route5}}</h2>
+      <h4>{{stop5}}</h4>
+      <p>{{ times50 }}</p>
+      <p>{{ times51 }}</p>
+      <p>{{ times52 }}</p>
   </div>
 </div>
 
