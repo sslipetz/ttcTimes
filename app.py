@@ -9,14 +9,16 @@ stop_511south = "http://webservices.nextbus.com/service/publicXMLFeed?command=pr
 stop_511north = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=0100&routeTag=511"
 stop_510north = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=10777&routeTag=510"
 stop_121east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=15504&routeTag=121"
-stops = [stop_509east,stop_511north,stop_511south,stop_510north,stop_121east]
+stop_509west = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13362&routeTag=509"
+stops = [stop_509east,stop_509west,stop_511north,stop_511south,stop_510north,stop_121east]
 dirTags = {"511_1_511":"511 North- Bathurst @ Fort York",
            "511_0_511":"511 South- Bathurst @ Fort York",
            "509_0_509":"509 East- Queens Quay @ Dan Leckie",
+           "509_1_509":"509 West- Queens Quay @ Bathurst",
            "121_0_121":"121 East- Fort York @ Bathurst",
            "510_1_510": "510 North- Spadina @ Fort York"}
-timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","121_0_121":"","510_1_510":""}
-keyList = ["511_1_511","511_0_511","509_0_509","121_0_121","510_1_510"]
+timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","509_1_509":"","121_0_121":"","510_1_510":""}
+keyList = ["511_1_511","509_0_509","510_1_510","511_0_511","509_1_509","121_0_121"]
 
 app = Flask(__name__)
 
@@ -45,19 +47,12 @@ def index():
         print(timeList)
 
     return render_template('index.html',
-                           route0=dirTags[keyList[0]],
-                           route1=dirTags[keyList[1]],
-                           route2=dirTags[keyList[2]],
-                           route3=dirTags[keyList[3]],
-                           route4=dirTags[keyList[4]],
-                           route5=dirTags[keyList[4]],
-                           times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
-                           times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
-                           times20=timeList[keyList[2]][0], times21=timeList[keyList[2]][1], times22=timeList[keyList[2]][2],
-                           times30=timeList[keyList[3]][0], times31=timeList[keyList[3]][1], times32=timeList[keyList[3]][2],
-                           times40=timeList[keyList[4]][0], times41=timeList[keyList[4]][1], times42=timeList[keyList[4]][2],
-                           times50=timeList[keyList[4]][0], times51=timeList[keyList[4]][1], times52=timeList[keyList[4]][2],
-                           )
+        route0=dirTags[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
+        route1=dirTags[keyList[1]],times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
+        route2=dirTags[keyList[2]],times20=timeList[keyList[2]][0], times21=timeList[keyList[2]][1], times22=timeList[keyList[2]][2],
+        route3=dirTags[keyList[3]],times30=timeList[keyList[3]][0], times31=timeList[keyList[3]][1], times32=timeList[keyList[3]][2],
+        route4=dirTags[keyList[4]],times40=timeList[keyList[4]][0], times41=timeList[keyList[4]][1], times42=timeList[keyList[4]][2],
+        route5=dirTags[keyList[5]],times50=timeList[keyList[5]][0], times51=timeList[keyList[5]][1], times52=timeList[keyList[5]][2],)
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
