@@ -23,7 +23,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-
     for stopnum,item in enumerate(stops):
         arrtimes = []
         file = urlopen(item)
@@ -42,8 +41,6 @@ def index():
 
         dirTag = vehicle['@dirTag']
         timeList[dirTag] = arrtimes
-        print(dirTags)
-        print(timeList)
 
     return render_template('index.html',route0=dirTags[keyList[0]],route1=dirTags[keyList[1]],
                            route2=dirTags[keyList[2]],route3=dirTags[keyList[3]],route4=dirTags[keyList[4]],
