@@ -1,9 +1,7 @@
 from flask import Flask, render_template
-
 from urllib.request import urlopen
 import xmltodict
 import datetime as dt
-
 stop_509east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13369&routeTag=509"
 stop_511south = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13672&routeTag=511"
 stop_511north = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=0100&routeTag=511"
@@ -11,12 +9,9 @@ stop_510north = "http://webservices.nextbus.com/service/publicXMLFeed?command=pr
 stop_121east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=15504&routeTag=121"
 stop_509west = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13362&routeTag=509"
 stops = [stop_509east,stop_509west,stop_511north,stop_511south,stop_510north,stop_121east]
-dirTags = {"511_1_511":"511 N- Bathurst @ Fort York",
-           "511_0_511":"511 S- Bathurst @ Fort York",
-           "509_0_509":"509 E- Queens Qy. @ Dan Leckie",
-           "509_1_509":"509 W- Queens Qy. @ Bathurst",
-           "121_0_121":"121 E- Fort York @ Bathurst",
-           "510_1_510":"510 N- Spadina @ Fort York"}
+dirTags = {"511_1_511":"511 N- Bathurst @ Fort York","511_0_511":"511 S- Bathurst @ Fort York",
+           "509_0_509":"509 E- Queens Qy. @ Dan Leckie","509_1_509":"509 W- Queens Qy. @ Bathurst",
+           "121_0_121":"121 E- Fort York @ Bathurst","510_1_510":"510 N- Spadina @ Fort York"}
 timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","509_1_509":"","121_0_121":"","510_1_510":""}
 keyList = ["511_1_511","509_0_509","510_1_510","511_0_511","509_1_509","121_0_121"]
 
@@ -42,9 +37,9 @@ def index():
 
         dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         timeList[dirTag] = arrtimes
-        while len(timeList[dirTag])<3:
-            timeList[dirTag].append("")
-        print(timeList)
+        while len(timeList[dirTag]) <3:
+            timeList[dirTag].append("N/A")
+        #print(timeList)
 
     return render_template('index.html',
         route0=dirTags[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
