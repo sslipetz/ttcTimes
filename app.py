@@ -11,12 +11,12 @@ stop_510north = "http://webservices.nextbus.com/service/publicXMLFeed?command=pr
 stop_121east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=15504&routeTag=121"
 stop_509west = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13362&routeTag=509"
 stops = [stop_509east,stop_509west,stop_511north,stop_511south,stop_510north,stop_121east]
-dirTags = {"511_1_511":"511 North- Bathurst @ Fort York",
-           "511_0_511":"511 South- Bathurst @ Fort York",
-           "509_0_509":"509 East- Queens Quay @ Dan Leckie",
-           "509_1_509":"509 West- Queens Quay @ Bathurst",
-           "121_0_121":"121 East- Fort York @ Bathurst",
-           "510_1_510": "510 North- Spadina @ Fort York"}
+dirTags = {"511_1_511":"511 N- Bathurst @ Fort York",
+           "511_0_511":"511 S- Bathurst @ Fort York",
+           "509_0_509":"509 E- Queens Qy. @ Dan Leckie",
+           "509_1_509":"509 W- Queens Qy. @ Bathurst",
+           "121_0_121":"121 E- Fort York @ Bathurst",
+           "510_1_510":"510 N- Spadina @ Fort York"}
 timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","509_1_509":"","121_0_121":"","510_1_510":""}
 keyList = ["511_1_511","509_0_509","510_1_510","511_0_511","509_1_509","121_0_121"]
 
