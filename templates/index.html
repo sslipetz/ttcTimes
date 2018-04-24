@@ -1,15 +1,27 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Transit Times</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1",>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <body>
-<h1> {{ route0 }} </h1>
-<h3> {{ times0 }} </h3>
-<h1> {{ route1 }} </h1>
-<h3> {{ times1 }} </h3>
-<h1> {{ route2 }} </h1>
-<h3> {{ times2 }} </h3>
-<h1> {{ route3 }} </h1>
-<h3> {{ times3 }} </h3>
-<h1> {{ route4 }} </h1>
-<h3> {{ times4 }} </h3>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-4" style="background-color:lavender;"><b>{{route0}}</b><br/>{{ times00 }}<br/>{{ times01 }}<br/>{{ times02 }}</div>
+    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route1}}</b><br/>{{ times10 }}<br/>{{ times11 }}<br/>{{ times12 }}</div>
+    <div class="col-sm-4" style="background-color:lavender;"><b>{{route2}}</b><br/>{{ times20 }}<br/>{{ times21 }}<br/>{{ times22 }}</div>
+  </div>
+ <div class="row">
+    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route3}}</b><br/>{{ times30 }}<br/>{{ times31 }}<br/>{{ times32 }}</div>
+    <div class="col-sm-4" style="background-color:lavender;"><b>{{route4}}</b><br/>{{ times40 }}<br/>{{ times41 }}<br/>{{ times42 }}</div>
+    <div class="col-sm-4" style="background-color:lavenderblush;"><b>{{route4}}</b><br/>{{ times40 }}<br/>{{ times41 }}<br/>{{ times42 }}</div>
+  </div>
+</div>
 
 </body>
 </html>

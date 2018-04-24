@@ -39,13 +39,25 @@ def index():
             arrtimes.append(arr.strftime("%M:%S"))
 
         dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-        timeList[dirTag] = ", ".join(arrtimes)
-        #print(timeList)
+        timeList[dirTag] = arrtimes
+        while len(timeList[dirTag])<3:
+            timeList[dirTag].append("")
+        print(timeList)
 
-    return render_template('index.html',route0=dirTags[keyList[0]],route1=dirTags[keyList[1]],
-                           route2=dirTags[keyList[2]],route3=dirTags[keyList[3]],route4=dirTags[keyList[4]],
-                           times0=timeList[keyList[0]],times1=timeList[keyList[1]],times2=timeList[keyList[2]],
-                           times3=timeList[keyList[3]],times4=timeList[keyList[4]])
+    return render_template('index.html',
+                           route0=dirTags[keyList[0]],
+                           route1=dirTags[keyList[1]],
+                           route2=dirTags[keyList[2]],
+                           route3=dirTags[keyList[3]],
+                           route4=dirTags[keyList[4]],
+                           route5=dirTags[keyList[4]],
+                           times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
+                           times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
+                           times20=timeList[keyList[2]][0], times21=timeList[keyList[2]][1], times22=timeList[keyList[2]][2],
+                           times30=timeList[keyList[3]][0], times31=timeList[keyList[3]][1], times32=timeList[keyList[3]][2],
+                           times40=timeList[keyList[4]][0], times41=timeList[keyList[4]][1], times42=timeList[keyList[4]][2],
+                           times50=timeList[keyList[4]][0], times51=timeList[keyList[4]][1], times52=timeList[keyList[4]][2],
+                           )
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 
