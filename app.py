@@ -23,8 +23,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    arrtimes = []
+
     for stopnum,item in enumerate(stops):
+        arrtimes = []
         file = urlopen(item)
         data = file.read()
         file.close()
