@@ -36,9 +36,10 @@ def index():
         for ind,vehicle in enumerate(preds):
             mins = str(min(int(int(vehicle['@seconds']) / 60),59))
             secs= str(min(int(int(vehicle['@seconds']) % 60),59))
-            arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
-
-            arrtimes.append(arr.strftime("%M:%S"))
+            #arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
+            #arr = arr.strftime("%M:%S")
+            arr = "{0} min".format(mins)
+            arrtimes.append(arr)
 
         dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         timeList[dirTag] = arrtimes
