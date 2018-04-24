@@ -18,7 +18,7 @@ dirTags = {"511_1_511":"511 North  Bathurst @ Fort York",
            "510_1_510A": "510 North Spadina @ Fort York",
            "510_1_510B": "510 North Spadina @ Fort York"}
 timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","121_0_121A":"","510_1_510A":""}
-
+keyList = ["511_1_511","511_0_511","509_0_509","121_0_121A","510_1_510A"]
 app = Flask(__name__)
 
 @app.route('/')
@@ -44,9 +44,10 @@ def index():
         print(dirTags)
         print(timeList)
 
-    return render_template('index.html',route0=dirTags[timeList[0]],route1=dirTags[timeList[0]],
-                           route2=dirTags[timeList[0]],route3=dirTags[timeList[0]],route4=dirTags[timeList[0]],
-                           times0=timeList[0],times1=timeList[0],times2=timeList[0],times3=timeList[0],times4=timeList[0])
+    return render_template('index.html',route0=dirTags[keyList[0]],route1=dirTags[keyList[1]],
+                           route2=dirTags[keyList[2]],route3=dirTags[keyList[3]],route4=dirTags[keyList[4]],
+                           times0=timeList[keyList[0]],times1=timeList[keyList[1]],times2=timeList[keyList[2]],
+                           times3=timeList[keyList[3]],times4=timeList[keyList[4]])
 
 
 if __name__ == '__main__':
