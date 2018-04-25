@@ -24,29 +24,35 @@ app = Flask(__name__)
 def index():
     for stopnum,item in enumerate(stops):
         arrtimes = []
-        file = urlopen(item)
-        data = file.read()
-        file.close()
-        data_dict = xmltodict.parse(data)
+        try:
+            file = urlopen(item)
+            data = file.read()
+            file.close()
+            data_dict = xmltodict.parse(data)
+        except:
+            print("Network error")
+
         try:
             preds = data_dict['body']['predictions']['direction']['prediction']
         except:
             preds = data_dict['body']['predictions']['direction'][1]['prediction']
 
-        for ind,vehicle in enumerate(preds):
-            mins = str(min(int(int(vehicle['@seconds']) / 60),59))
-            secs= str(min(int(int(vehicle['@seconds']) % 60),59))
-            #arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
-            #arr = arr.strftime("%M:%S")
-            arr = "{0} min".format(mins)
-            arrtimes.append(arr)
+        try:
+            for ind,vehicle in enumerate(preds):
+                mins = str(min(int(int(vehicle['@seconds']) / 60),59))
+                secs= str(min(int(int(vehicle['@seconds']) % 60),59))
+                #arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
+                #arr = arr.strftime("%M:%S")
+                arr = "{0} min".format(mins)
+                arrtimes.append(arr)
 
-        dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-        timeList[dirTag] = arrtimes
-        while len(timeList[dirTag]) <3:
-            timeList[dirTag].append("N/A")
-        #print(timeList)
-
+            dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+            timeList[dirTag] = arrtimes
+            while len(timeList[dirTag]) <3:
+                timeList[dirTag].append("N/A")
+            #print(timeList)
+        except:
+            print("Error updating time lists")
     return render_template('index.html',
         route0=routes[keyList[0]],stop0=close_stop[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
         route1=routes[keyList[1]],stop1=close_stop[keyList[1]],times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
