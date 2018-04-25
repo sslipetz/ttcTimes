@@ -31,7 +31,9 @@ def index():
             file.close()
             data_dict = xmltodict.parse(data)
         except:
+            error = True
             print("Network error")
+
         if not error:
             try:
                 preds = data_dict['body']['predictions']['direction']['prediction']
