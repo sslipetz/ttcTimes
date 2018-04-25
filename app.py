@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 from urllib.request import urlopen
 import xmltodict
-import datetime as dt
 stop_509east = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13369&routeTag=509"
 stop_511south = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=13672&routeTag=511"
 stop_511north = "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=ttc&stopId=0100&routeTag=511"
@@ -15,13 +14,15 @@ routes = {"511_1_511":"511 North","511_0_511":"511 South",
 close_stop = {"511_1_511":"Bathurst @ Fort York","511_0_511":"Bathurst @ Fort York",
            "509_0_509":"Queens Quay @ Dan Leckie","509_1_509":"Queens Quay @ Bathurst",
            "121_0_121":"Fort York @ Bathurst","510_1_510":"Spadina @ Fort York"}
-timeList= {"511_1_511":"","511_0_511":"","509_0_509":"","509_1_509":"","121_0_121":"","510_1_510":""}
+timeList= {"511_1_511":["N/A","N/A","N/A"],"511_0_511":["N/A","N/A","N/A"],"509_0_509":["N/A","N/A","N/A"],
+           "509_1_509":["N/A","N/A","N/A"],"121_0_121":["N/A","N/A","N/A"],"510_1_510":["N/A","N/A","N/A"]}
 keyList = ["511_1_511","509_0_509","510_1_510","511_0_511","509_1_509","121_0_121"]
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
+    error = False
     for stopnum,item in enumerate(stops):
         arrtimes = []
         try:
@@ -31,28 +32,26 @@ def index():
             data_dict = xmltodict.parse(data)
         except:
             print("Network error")
+        if not error:
+            try:
+                preds = data_dict['body']['predictions']['direction']['prediction']
+            except:
+                preds = data_dict['body']['predictions']['direction'][1]['prediction']
 
-        try:
-            preds = data_dict['body']['predictions']['direction']['prediction']
-        except:
-            preds = data_dict['body']['predictions']['direction'][1]['prediction']
+        if not error:
+            try:
+                for ind,vehicle in enumerate(preds):
+                    mins = str(min(int(int(vehicle['@seconds']) / 60),59))
+                    arr = "{0} min".format(mins)
+                    arrtimes.append(arr)
 
-        try:
-            for ind,vehicle in enumerate(preds):
-                mins = str(min(int(int(vehicle['@seconds']) / 60),59))
-                secs= str(min(int(int(vehicle['@seconds']) % 60),59))
-                #arr = dt.datetime.strptime( mins+ ":" +secs,"%M:%S")
-                #arr = arr.strftime("%M:%S")
-                arr = "{0} min".format(mins)
-                arrtimes.append(arr)
-
-            dirTag = vehicle['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-            timeList[dirTag] = arrtimes
-            while len(timeList[dirTag]) <3:
-                timeList[dirTag].append("N/A")
-            #print(timeList)
-        except:
-            print("Error updating time lists")
+                dirTag = preds[0]['@dirTag'].rstrip('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+                timeList[dirTag] = arrtimes
+                while len(timeList[dirTag]) <3:
+                    timeList[dirTag].append("N/A")
+                #print(timeList)
+            except:
+                print("Error updating time lists")
     return render_template('index.html',
         route0=routes[keyList[0]],stop0=close_stop[keyList[0]],times00=timeList[keyList[0]][0], times01=timeList[keyList[0]][1], times02=timeList[keyList[0]][2],
         route1=routes[keyList[1]],stop1=close_stop[keyList[1]],times10=timeList[keyList[1]][0], times11=timeList[keyList[1]][1], times12=timeList[keyList[1]][2],
