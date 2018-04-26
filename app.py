@@ -38,7 +38,12 @@ def index():
             try:
                 preds = data_dict['body']['predictions']['direction']['prediction']
             except:
-                preds = data_dict['body']['predictions']['direction'][1]['prediction']
+                try:
+                    preds = data_dict['body']['predictions']['direction'][1]['prediction']
+                except:
+                    error = True
+                    print("XML parsing error")
+                    continue
 
         if not error:
             try:
